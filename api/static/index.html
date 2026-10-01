@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dropout Prediction</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: #FCFBF8;
+            color: #1C1C1C;
+        }
+        .input-field {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #E5E4E0;
+            border-radius: 0.75rem;
+            font-size: 0.95rem;
+            transition: all 0.2s ease-in-out;
+            background-color: #FFFFFF;
+            color: #1C1C1C;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #313131;
+            box-shadow: 0 0 0 3px rgba(49, 49, 49, 0.05);
+        }
+        label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #555450;
+            margin-bottom: 0.4rem;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FCFBF8;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D5D4D0;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #B5B4B0;
+        }
+    </style>
+</head>
+<body class="min-h-screen m-0 p-0 flex flex-col overflow-x-hidden">
+
+    <div class="flex-1 flex flex-col lg:flex-row w-full m-0 p-0">
+        
+        <div class="w-full lg:w-[55%] p-8 sm:p-12 lg:px-20 lg:py-12 flex flex-col justify-center bg-[#FCFBF8]">
+            
+            <div class="w-full max-w-3xl">
+                <span class="text-xs font-mono text-[#8C8B88] uppercase tracking-wider mb-2 block">/prediction-engine</span>
+                <h2 class="text-[2.75rem] leading-tight font-bold tracking-tight text-[#1C1C1C] mb-4">
+                    Evaluate student risk with built-in ML safeguards
+                </h2>
+                <p class="text-[1.05rem] text-[#6B6A68] mb-10 max-w-2xl leading-relaxed">
+                    Requests pass through our prediction layer to identify early warning signs of dropout, utilizing previous semester academic performance and enrollment profiles.
+                </p>
+
+                <form id="predictionForm" class="space-y-8 bg-[#F6F5F8] p-8 rounded-2xl border border-[#EAE9EB]">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
+                        <div>
+                            <label for="age_at_enrollment">Age at Enrollment</label>
+                            <input type="number" id="age_at_enrollment" required min="10" step="1" class="input-field" placeholder="e.g. 20">
+                        </div>
+
+                        <div>
+                            <label for="gender">Gender</label>
+                            <select id="gender" required class="input-field">
+                                <option value="" disabled selected>Select gender</option>
+                                <option value="1">Male</option>
+                                <option value="0">Female</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="admission_grade_pct">Admission Grade (%)</label>
+                            <input type="number" id="admission_grade_pct" required min="0" max="100" step="0.1" class="input-field" placeholder="0 - 100">
+                        </div>
+
+                        <div>
+                            <label for="scholarship_holder">Scholarship Holder</label>
+                            <select id="scholarship_holder" required class="input-field">
+                                <option value="" disabled selected>Select option</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="debtor">Debtor</label>
+                            <select id="debtor" required class="input-field">
+                                <option value="" disabled selected>Select option</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="displaced">Displaced</label>
+                            <select id="displaced" required class="input-field">
+                                <option value="" disabled selected>Select option</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="previous_semester_enrolled_subjects">Total Subjects (Prev. Sem)</label>
+                            <input type="number" id="previous_semester_enrolled_subjects" required min="0" step="1" class="input-field" placeholder="Enrolled subjects">
+                        </div>
+
+                        <div>
+                            <label for="previous_semester_approved_subjects">Passed Subjects (Prev. Sem)</label>
+                            <input type="number" id="previous_semester_approved_subjects" required min="0" step="1" class="input-field" placeholder="Approved subjects">
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <label for="previous_semester_avg_grade_pct">Previous Semester Average Grade (%)</label>
+                            <input type="number" id="previous_semester_avg_grade_pct" required min="0" max="100" step="0.1" class="input-field" placeholder="0 - 100">
+                        </div>
+                    </div>
+
+                    <div class="pt-4 flex justify-end">
+                        <button type="submit" class="bg-[#333333] hover:bg-[#1C1C1C] text-white px-8 py-3.5 rounded-full text-[0.95rem] font-medium transition-colors shadow-sm flex items-center gap-2">
+                            Run Analysis <span class="text-xs">→</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="w-full lg:w-[45%] p-8 sm:p-12 lg:p-20 flex flex-col justify-center items-center relative bg-[#FCFBF8]">
+            
+            <div id="initialState" class="text-center space-y-4 opacity-100 transition-opacity duration-300">
+                <div class="w-16 h-16 rounded-full mx-auto flex items-center justify-center text-[#B5B4B0] border border-[#EAE9EB] bg-[#F6F5F8]">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h3 class="text-lg font-medium text-[#555450]">Waiting for payload</h3>
+                <p class="text-[#8C8B88] max-w-sm mx-auto text-sm">Submit the form to generate a secure risk assessment payload.</p>
+            </div>
+
+            <div id="result" class="hidden w-full max-w-md p-10 rounded-2xl border border-[#EAE9EB] bg-[#F6F5F8] transition-all duration-500 transform translate-y-4 opacity-0 shadow-sm">
+                <div class="flex flex-col items-center text-center space-y-6">
+                    <p class="text-xs font-mono text-[#8C8B88] uppercase tracking-wider">Response Generated</p>
+                    
+                    <div id="probCircle" class="flex items-center justify-center w-28 h-28 rounded-full border-[6px] font-bold text-3xl text-[#1C1C1C]">
+                    </div>
+                    
+                    <h3 id="resultLabel" class="text-2xl font-bold mt-2 text-[#1C1C1C]"></h3>
+                    <p id="resultDesc" class="text-[0.95rem] leading-relaxed text-[#555450]"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const enrolled = parseInt(document.getElementById('previous_semester_enrolled_subjects').value);
+            const approved = parseInt(document.getElementById('previous_semester_approved_subjects').value);
+            if (approved > enrolled) {
+                alert("Passed subjects cannot be greater than total enrolled subjects.");
+                return;
+            }
+
+            const formData = {
+                age_at_enrollment: parseFloat(document.getElementById('age_at_enrollment').value),
+                gender: parseInt(document.getElementById('gender').value),
+                admission_grade_pct: parseFloat(document.getElementById('admission_grade_pct').value),
+                scholarship_holder: parseInt(document.getElementById('scholarship_holder').value),
+                debtor: parseInt(document.getElementById('debtor').value),
+                displaced: parseInt(document.getElementById('displaced').value),
+                previous_semester_enrolled_subjects: enrolled,
+                previous_semester_approved_subjects: approved,
+                previous_semester_avg_grade_pct: parseFloat(document.getElementById('previous_semester_avg_grade_pct').value)
+            };
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = 'Processing... <span class="text-xs">→</span>';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    alert('Server error: ' + (data.detail || JSON.stringify(data)));
+                    return;
+                }
+                
+                document.getElementById('initialState').style.display = 'none';
+                
+                const resultDiv = document.getElementById('result');
+                const resultLabel = document.getElementById('resultLabel');
+                const probCircle = document.getElementById('probCircle');
+                const resultDesc = document.getElementById('resultDesc');
+                
+                resultDiv.classList.remove('hidden');
+                setTimeout(() => {
+                    resultDiv.classList.remove('translate-y-4', 'opacity-0');
+                    resultDiv.classList.add('translate-y-0', 'opacity-100');
+                }, 50);
+
+                resultLabel.innerText = data.label;
+                const probPct = (data.dropout_probability * 100).toFixed(1);
+                probCircle.innerText = probPct + '%';
+
+                if (data.prediction === 1) {
+                    resultDiv.className = 'w-full max-w-md p-10 rounded-2xl border border-[#F5C2C7] bg-[#FFF5F6] transition-all duration-500 transform translate-y-0 opacity-100 shadow-sm';
+                    probCircle.className = 'flex items-center justify-center w-28 h-28 rounded-full border-[6px] border-[#E85D75] text-[#C92A42] font-bold text-3xl bg-white';
+                    resultDesc.innerText = 'This profile triggers our risk safeguards. The historical data strongly correlates with dropping out. Early intervention is advised.';
+                } else {
+                    resultDiv.className = 'w-full max-w-md p-10 rounded-2xl border border-[#C3E6CB] bg-[#F2FBF5] transition-all duration-500 transform translate-y-0 opacity-100 shadow-sm';
+                    probCircle.className = 'flex items-center justify-center w-28 h-28 rounded-full border-[6px] border-[#597B6A] text-[#3E5C4E] font-bold text-3xl bg-white';
+                    resultDesc.innerText = 'The payload passes standard validation and shows a low risk of dropout. The student is on track.';
+                }
+                
+            } catch (error) {
+                alert('Connection error. Is the server running?');
+                console.error(error);
+            } finally {
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+data/raw/
+data/processed/
+reports/
+# Do not ignore artifacts/ since the model needs to be deployed
+create_notebooks.py

@@ -1,0 +1,11 @@
+ucimlrepo
+pandas
+scikit-learn
+fastapi
+uvicorn
+jupyter
+ipykernel
+matplotlib
+seaborn
+joblib
+imbalanced-learn

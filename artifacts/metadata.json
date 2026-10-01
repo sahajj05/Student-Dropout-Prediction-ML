@@ -1,0 +1,37 @@
+{
+    "features": [
+        {
+            "name": "age_at_enrollment",
+            "type": "numeric"
+        },
+        {
+            "name": "gender",
+            "type": "binary"
+        },
+        {
+            "name": "admission_grade_pct",
+            "type": "numeric"
+        },
+        {
+            "name": "scholarship_holder",
+            "type": "binary"
+        },
+        {
+            "name": "debtor",
+            "type": "binary"
+        },
+        {
+            "name": "displaced",
+            "type": "binary"
+        },
+        {
+            "name": "previous_semester_pass_ratio_pct",
+            "type": "numeric"
+        },
+        {
+            "name": "previous_semester_avg_grade_pct",
+            "type": "numeric"
+        }
+    ],
+    "target": "dropout"
+}
